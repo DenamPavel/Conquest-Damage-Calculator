@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Conquest-Damage-Calculator/static/css/main.cb288829.css",
+    "main.js": "/Conquest-Damage-Calculator/static/js/main.83e70074.js",
+    "static/js/453.10f2f0d7.chunk.js": "/Conquest-Damage-Calculator/static/js/453.10f2f0d7.chunk.js",
+    "index.html": "/Conquest-Damage-Calculator/index.html",
+    "main.cb288829.css.map": "/Conquest-Damage-Calculator/static/css/main.cb288829.css.map",
+    "main.83e70074.js.map": "/Conquest-Damage-Calculator/static/js/main.83e70074.js.map",
+    "453.10f2f0d7.chunk.js.map": "/Conquest-Damage-Calculator/static/js/453.10f2f0d7.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.cb288829.css",
+    "static/js/main.83e70074.js"
+  ]
+}

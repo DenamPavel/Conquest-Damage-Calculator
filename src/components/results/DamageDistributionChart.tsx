@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   ResponsiveContainer,
+  LabelList,
 } from 'recharts';
 import { SimulationResults } from '../../types/SimulationTypes';
 
@@ -50,9 +51,14 @@ export const DamageDistributionChart: React.FC<DamageDistributionChartProps> = R
           <Bar
             dataKey="probability"
             fill="#8884d8"
-            name="Probability"
             isAnimationActive={false}
-          />
+          >
+            <LabelList
+              dataKey="probability"
+              position="top"
+              formatter={(value: number) => `${value.toFixed(1)}%`}
+            />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
     </div>

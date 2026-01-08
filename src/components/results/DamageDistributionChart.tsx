@@ -56,7 +56,7 @@ export const DamageDistributionChart: React.FC<DamageDistributionChartProps> = R
             <LabelList
               dataKey="probability"
               position="top"
-              formatter={(value: number) => `${value.toFixed(1)}%`}
+              formatter={(value: any) => typeof value === 'number' ? `${value.toFixed(1)}%` : ''}
             />
           </Bar>
         </BarChart>

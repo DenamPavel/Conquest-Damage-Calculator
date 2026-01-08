@@ -6,7 +6,6 @@ import {
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
 } from 'recharts';
 import { SimulationResults } from '../../types/SimulationTypes';
@@ -48,7 +47,6 @@ export const DamageDistributionChart: React.FC<DamageDistributionChartProps> = R
             formatter={(value) => typeof value === 'number' ? `${value.toFixed(2)}%` : ''}
             labelFormatter={(label) => `Damage: ${label}`}
           />
-          <Legend />
           <Bar
             dataKey="probability"
             fill="#8884d8"

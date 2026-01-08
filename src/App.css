@@ -1,38 +1,504 @@
+/* Root and App Styles */
 .App {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+/* Conquest Calculator */
+.conquest-calculator {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Calculator Header */
+.calculator-header {
+  text-align: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.calculator-header h1 {
+  margin: 0 0 10px 0;
+  font-size: 2.5rem;
+}
+
+.calculator-header p {
+  margin: 0;
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* Three Column Grid */
+.three-column-grid {
+  display: grid;
+  grid-template-columns: 280px 280px 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+@media (max-width: 1200px) {
+  .three-column-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .column-3 {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 768px) {
+  .three-column-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Column Layouts */
+.column-1,
+.column-2,
+.column-3 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Unit Inputs Section (fallback for when no results) */
+.unit-inputs-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .unit-inputs-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Unit Inputs */
+.unit-inputs {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.unit-inputs h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 8px;
+}
+
+/* Number Input */
+.number-input {
+  margin-bottom: 12px;
+}
+
+.number-input label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-weight: 600;
+  color: #495057;
+}
+
+.number-input input[type="number"] {
+  padding: 10px;
+  border: 2px solid #dee2e6;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.number-input input[type="number"]:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Checkbox Input */
+.checkbox-input {
+  margin-bottom: 12px;
+}
+
+.checkbox-input label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+}
+
+.checkbox-input input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #667eea;
+}
+
+.checkbox-input span {
+  user-select: none;
+}
+
+/* Simulation Settings Bottom */
+.simulation-settings-bottom {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 2px solid #e9ecef;
+}
+
+/* Simulation Controls */
+.simulation-controls {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.simulation-controls h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 1.2rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.iterations-control {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+.iterations-control label {
+  font-weight: 600;
+  color: #495057;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.iterations-control input[type="range"] {
+  width: 100%;
+  height: 8px;
+  border-radius: 5px;
+  background: #dee2e6;
+  outline: none;
+  -webkit-appearance: none;
+}
+
+.iterations-control input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+}
+
+.iterations-control input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #667eea;
+  cursor: pointer;
+}
+
+.range-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #667eea;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-spinner p {
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+/* Simulation Results */
+.simulation-results {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Statistics Summary */
+.statistics-summary {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.statistics-summary h3 {
+  margin: 0 0 20px 0;
+  color: #495057;
+  font-size: 1.8rem;
+}
+
+.stat-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 1024px) {
+  .stat-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 768px) {
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Stat Card */
+.stat-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.stat-card-title {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.stat-card-value {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.stat-card-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Execution Info */
+.execution-info {
+  text-align: center;
+  color: #6c757d;
+  font-size: 0.95rem;
+  padding-top: 15px;
+  border-top: 1px solid #dee2e6;
+}
+
+/* Damage Distribution Chart */
+.damage-distribution-chart {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.damage-distribution-chart h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 1.3rem;
+}
+
+/* Distribution Table */
+.distribution-table {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.distribution-table h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 1.3rem;
+}
+
+.table-wrapper {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+}
+
+.distribution-table table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.distribution-table thead {
+  position: sticky;
+  top: 0;
+  background: #f8f9fa;
+  z-index: 1;
+}
+
+.distribution-table th {
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.distribution-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.distribution-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.distribution-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Error Message */
+.error-message {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 15px;
+  border-radius: 5px;
+  border: 1px solid #f5c6cb;
+}
+
+.error-message p {
+  margin: 0;
+}
+
+/* Special Rules Box */
+.special-rules-box {
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  border: 2px solid #e9ecef;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.special-rules-box h3 {
+  margin: 0 0 15px 0;
+  color: #495057;
+  font-size: 1.3rem;
+  border-bottom: 2px solid #667eea;
+  padding-bottom: 8px;
+}
+
+.special-rules-content {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.rule-description {
+  color: #6c757d;
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: -5px 0 0 0;
+  padding-left: 26px;
+}
+
+.special-rules-input {
+  margin-top: 15px;
+  padding: 15px;
+  background: #e9ecef;
+  border-radius: 5px;
+}
+
+.special-rules-input h4 {
+  margin: 0 0 10px 0;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.placeholder-text {
+  color: #6c757d;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .calculator-header h1 {
+    font-size: 2rem;
+  }
+
+  .calculator-header p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .combat-inputs,
+  .statistics-summary,
+  .damage-distribution-chart {
+    padding: 20px;
+  }
+
+  .stat-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .calculator-header h1 {
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .calculator-header p {
+    font-size: 0.9rem;
+  }
+
+  .stat-card-value {
+    font-size: 2rem;
   }
 }

@@ -1,0 +1,13 @@
+﻿User,Name,Effect,Type
+Attacker,Rerolls,"Two selectable options, one of which is ""reroll 6s"" and one of which is ""reroll all failures""",Selection
+Attacker,Deadly Blades,Failed defense rolls of 6 cause 2 wounds instead of 1,Check
+Attacker,Flawless Strikes,Hit rolls of 1 set the defense value to 0 for those hits,Check
+Defender,Hardened,Numeric value that decreases cleave from the attacker by that much to minimum 0,Numeric
+Defender,Indominable,"Numeric value that ignores that many failed morale saves, prioritizing failed 6s after rerolls",Numeric
+Defender,Oblivious,Only suffer 1 damage for every 2 failed morale checks,Check
+Attacker,Relentless Blows,Hit rolls of 1 generate 2 hits instead of 1,Check
+Attacker,Smite,Set defender's defense to 0,Check
+Defender,Tenacious,"Numeric value that ignores that many failed defense rolls, prioritizing failed 6s after rerolls",Numeric
+Attacker,Torrential Fire,"After rolling hits, generate another hit for every 2 hits you rolled",Check
+Defender,Defensive Rerolls,"Two selectable options, one of which is ""reroll 6s"" against hits and one of which is ""reroll all failures"" against hits",Selection
+Defender,Morale Rerolls,"Two selectable options, one of which is ""reroll 6s"" against failed morale and one of which is ""reroll all failures"" against failed morale",Selection

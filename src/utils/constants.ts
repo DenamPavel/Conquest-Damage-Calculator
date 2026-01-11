@@ -10,8 +10,14 @@ export const DEFAULT_ATTACKER: Attacker = {
   clash: 3,
   cleave: 0,
   extraAttacks: 0,
-  relentlessBlows: false,
   specialRules: [],
+  // Special Rules
+  rerolls: 'none',
+  deadlyBlades: false,
+  flawlessStrikes: false,
+  relentlessBlows: false,
+  smite: false,
+  torrentialFire: false,
 };
 
 /**
@@ -24,8 +30,14 @@ export const DEFAULT_DEFENDER: Defender = {
   currentStands: 3,
   stands: 3,
   morale: 3,
-  hardened: 0,
   specialRules: [],
+  // Special Rules
+  hardened: 0,
+  indomitable: 0,
+  oblivious: false,
+  tenacious: 0,
+  defensiveRerolls: 'none',
+  moraleRerolls: 'none',
 };
 
 /**

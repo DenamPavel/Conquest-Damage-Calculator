@@ -9,6 +9,11 @@ export interface BaseUnit {
 }
 
 /**
+ * Reroll options for attack and defense
+ */
+export type RerollOption = 'none' | 'reroll_sixes' | 'reroll_failures';
+
+/**
  * Attacking unit configuration
  */
 export interface Attacker extends BaseUnit {
@@ -16,7 +21,14 @@ export interface Attacker extends BaseUnit {
   clash: number; // Hit threshold (1-6)
   cleave: number; // Reduces defender's defense by this amount
   extraAttacks: number; // Additional dice added to attack pool
-  relentlessBlows: boolean; // Rolls of 1 generate 2 hits instead of 1
+
+  // Special Rules
+  rerolls: RerollOption; // Reroll 6s or all failures on attack rolls
+  deadlyBlades: boolean; // Failed defense rolls of 6 cause 2 wounds instead of 1
+  flawlessStrikes: boolean; // Hit rolls of 1 set defense to 0 for those hits
+  relentlessBlows: boolean; // Hit rolls of 1 generate 2 hits instead of 1
+  smite: boolean; // Set defender's defense to 0
+  torrentialFire: boolean; // Generate extra hits for every 2 hits rolled
 }
 
 /**
@@ -28,7 +40,14 @@ export interface Defender extends BaseUnit {
   health: number; // Wounds per stand
   currentStands: number; // Stands remaining (for multi-round)
   morale: number; // Morale stat (1-6)
+
+  // Special Rules
   hardened: number; // Reduces attacker's Cleave by this amount
+  indomitable: number; // Ignores X failed morale saves, prioritizing failed 6s
+  oblivious: boolean; // Only suffer 1 damage for every 2 failed morale checks
+  tenacious: number; // Ignores X failed defense rolls, prioritizing failed 6s
+  defensiveRerolls: RerollOption; // Reroll 6s or all failures on defense rolls
+  moraleRerolls: RerollOption; // Reroll 6s or all failures on morale rolls
 }
 
 /**

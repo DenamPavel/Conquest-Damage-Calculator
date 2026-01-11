@@ -87,7 +87,7 @@ export class ConquestSimulator {
     const defenseResult = defensePhase(
       attacker,
       defender,
-      attackResult.hits,
+      attackResult,
       this.diceRoller,
       this.specialRuleRegistry
     );

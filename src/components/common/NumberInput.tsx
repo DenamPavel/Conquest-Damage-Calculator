@@ -8,6 +8,7 @@ interface NumberInputProps {
   max: number;
   step?: number;
   disabled?: boolean;
+  tooltip?: string;
 }
 
 export const NumberInput: React.FC<NumberInputProps> = ({
@@ -18,6 +19,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({
   max,
   step = 1,
   disabled = false,
+  tooltip,
 }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = parseInt(e.target.value, 10);
@@ -27,7 +29,7 @@ export const NumberInput: React.FC<NumberInputProps> = ({
   };
 
   return (
-    <div className="number-input">
+    <div className="number-input" title={tooltip}>
       <label htmlFor={label}>
         {label}
         <input

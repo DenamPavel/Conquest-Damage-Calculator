@@ -28,9 +28,10 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
   const renderRerollSelect = (
     label: string,
     field: 'rerolls' | 'defensiveRerolls' | 'moraleRerolls',
-    value: RerollOption
+    value: RerollOption,
+    tooltip: string
   ) => (
-    <div style={{ marginBottom: '12px' }}>
+    <div style={{ marginBottom: '12px' }} title={tooltip}>
       <label style={{ display: 'block', marginBottom: '4px', fontSize: '14px', fontWeight: '500' }}>{label}</label>
       <select
         value={value}
@@ -55,44 +56,73 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
     <div>
       {unitType === 'attacker' && (
         <>
-          {renderRerollSelect('Attacker Rerolls', 'rerolls', (unit as Attacker).rerolls)}
+          {renderRerollSelect(
+            'Attacker Rerolls',
+            'rerolls',
+            (unit as Attacker).rerolls,
+            'Reroll 6s or all failed attack rolls'
+          )}
 
           <Checkbox
             label="Deadly Blades"
             checked={(unit as Attacker).deadlyBlades}
             onChange={(checked) => updateField('deadlyBlades', checked)}
+            tooltip="Failed defense rolls of 6 cause 2 wounds instead of 1"
           />
 
           <Checkbox
             label="Flawless Strikes"
             checked={(unit as Attacker).flawlessStrikes}
             onChange={(checked) => updateField('flawlessStrikes', checked)}
+            tooltip="Hit rolls of 1 set defense to 0 for those hits"
           />
 
           <Checkbox
             label="Relentless Blows"
             checked={(unit as Attacker).relentlessBlows}
             onChange={(checked) => updateField('relentlessBlows', checked)}
+            tooltip="Hit rolls of 1 generate 2 hits instead of 1"
           />
 
           <Checkbox
             label="Smite"
             checked={(unit as Attacker).smite}
             onChange={(checked) => updateField('smite', checked)}
+            tooltip="Set defender's defense to 0"
+          />
+
+          <NumberInput
+            label="Terrifying"
+            value={(unit as Attacker).terrifying}
+            onChange={(value) => updateField('terrifying', value)}
+            min={0}
+            max={6}
+            tooltip="Reduces defender's morale by this amount (min 0). Morale rolls of 1 always succeed"
           />
 
           <Checkbox
             label="Torrential Fire"
             checked={(unit as Attacker).torrentialFire}
             onChange={(checked) => updateField('torrentialFire', checked)}
+            tooltip="Generate 1 extra hit for every 2 hits rolled"
           />
         </>
       )}
 
       {unitType === 'defender' && (
         <>
-          {renderRerollSelect('Defensive Rerolls', 'defensiveRerolls', (unit as Defender).defensiveRerolls)}
-          {renderRerollSelect('Morale Rerolls', 'moraleRerolls', (unit as Defender).moraleRerolls)}
+          {renderRerollSelect(
+            'Defensive Rerolls',
+            'defensiveRerolls',
+            (unit as Defender).defensiveRerolls,
+            'Reroll 6s or all failed defense rolls against hits'
+          )}
+          {renderRerollSelect(
+            'Morale Rerolls',
+            'moraleRerolls',
+            (unit as Defender).moraleRerolls,
+            'Reroll 6s or all failed morale rolls'
+          )}
 
           <NumberInput
             label="Hardened"
@@ -100,6 +130,7 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
             onChange={(value) => updateField('hardened', value)}
             min={0}
             max={6}
+            tooltip="Reduces attacker's Cleave by this amount (minimum 0)"
           />
 
           <NumberInput
@@ -108,12 +139,14 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
             onChange={(value) => updateField('indomitable', value)}
             min={0}
             max={10}
+            tooltip="Ignores this many failed morale saves, prioritizing failed 6s after rerolls"
           />
 
           <Checkbox
             label="Oblivious"
             checked={(unit as Defender).oblivious}
             onChange={(checked) => updateField('oblivious', checked)}
+            tooltip="Only suffer 1 damage for every 2 failed morale checks"
           />
 
           <NumberInput
@@ -122,6 +155,7 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
             onChange={(value) => updateField('tenacious', value)}
             min={0}
             max={10}
+            tooltip="Ignores this many failed defense rolls, prioritizing failed 6s after rerolls"
           />
         </>
       )}

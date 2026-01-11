@@ -28,6 +28,7 @@ export interface Attacker extends BaseUnit {
   flawlessStrikes: boolean; // Hit rolls of 1 set defense to 0 for those hits
   relentlessBlows: boolean; // Hit rolls of 1 generate 2 hits instead of 1
   smite: boolean; // Set defender's defense to 0
+  terrifying: number; // Reduces defender's morale by this amount (min 0), but morale rolls of 1 always succeed
   torrentialFire: boolean; // Generate extra hits for every 2 hits rolled
 }
 

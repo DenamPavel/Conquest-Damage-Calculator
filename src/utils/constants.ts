@@ -17,6 +17,7 @@ export const DEFAULT_ATTACKER: Attacker = {
   flawlessStrikes: false,
   relentlessBlows: false,
   smite: false,
+  terrifying: 0,
   torrentialFire: false,
 };
 

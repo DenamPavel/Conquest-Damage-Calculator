@@ -5,6 +5,7 @@ interface CheckboxProps {
   checked: boolean;
   onChange: (checked: boolean) => void;
   disabled?: boolean;
+  tooltip?: string;
 }
 
 export const Checkbox: React.FC<CheckboxProps> = ({
@@ -12,9 +13,10 @@ export const Checkbox: React.FC<CheckboxProps> = ({
   checked,
   onChange,
   disabled = false,
+  tooltip,
 }) => {
   return (
-    <div className="checkbox-input">
+    <div className="checkbox-input" title={tooltip}>
       <label>
         <input
           type="checkbox"

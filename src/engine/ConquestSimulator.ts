@@ -104,7 +104,8 @@ export class ConquestSimulator {
       defender,
       damageResult.damage,
       this.diceRoller,
-      this.specialRuleRegistry
+      this.specialRuleRegistry,
+      attacker
     );
 
     return {

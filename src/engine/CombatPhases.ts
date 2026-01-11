@@ -297,17 +297,19 @@ export function damagePhase(
  * Roll 1d6 per damage point, each roll > Morale = 1 additional wound
  *
  * Order:
- * 1. Roll morale checks
- * 2. Apply Morale Rerolls
- * 3. Apply Indomitable (ignore failed morale saves, prioritizing 6s)
- * 4. Apply Oblivious (only 1 damage per 2 failed morale checks)
- * 5. Calculate final morale damage
+ * 1. Apply Terrifying (reduce morale, minimum 0)
+ * 2. Roll morale checks (rolls of 1 always succeed)
+ * 3. Apply Morale Rerolls
+ * 4. Apply Indomitable (ignore failed morale saves, prioritizing 6s)
+ * 5. Apply Oblivious (only 1 damage per 2 failed morale checks)
+ * 6. Calculate final morale damage
  */
 export function moralePhase(
   defender: Defender,
   damage: number,
   diceRoller: DiceRoller,
-  ruleRegistry: SpecialRuleRegistry
+  ruleRegistry: SpecialRuleRegistry,
+  attacker?: Attacker
 ): MoralePhaseResult {
   if (damage === 0) {
     return {
@@ -317,21 +319,28 @@ export function moralePhase(
     };
   }
 
-  // Step 1: Roll morale checks
+  // Step 1: Apply Terrifying (reduce morale, minimum 0)
+  const terrifyingValue = attacker?.terrifying || 0;
+  const effectiveMorale = Math.max(0, defender.morale - terrifyingValue);
+
+  // Step 2: Roll morale checks
   let rolls = diceRoller.rollMultiple(damage);
 
-  // Step 2: Apply Morale Rerolls
-  rolls = applyRerolls(rolls, defender.moraleRerolls, defender.morale, diceRoller);
+  // Step 3: Apply Morale Rerolls
+  rolls = applyRerolls(rolls, defender.moraleRerolls, effectiveMorale, diceRoller);
 
-  // Step 3: Apply Indomitable
+  // Step 4: Apply Indomitable
   const { newRolls: indomitableRolls } = ignoreFailedRolls(
     rolls,
-    defender.morale,
+    effectiveMorale,
     defender.indomitable
   );
 
-  // Count failed morale checks
-  let failedMoraleChecks = indomitableRolls.filter(roll => roll > defender.morale).length;
+  // Count failed morale checks (morale rolls of 1 always succeed)
+  let failedMoraleChecks = indomitableRolls.filter(roll => {
+    if (roll === 1) return false; // Rolls of 1 always succeed
+    return roll > effectiveMorale;
+  }).length;
 
   // Step 4: Apply Oblivious
   let moraleWounds = failedMoraleChecks;

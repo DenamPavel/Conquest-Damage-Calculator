@@ -3,7 +3,6 @@ import { Attacker, Defender } from '../../types/UnitTypes';
 import { SimulationConfig } from '../../types/SimulationTypes';
 import { AttackerInputs } from '../inputs/AttackerInputs';
 import { DefenderInputs } from '../inputs/DefenderInputs';
-import { SpecialRulesInput } from '../inputs/SpecialRulesInput';
 import { SimulationControls } from './SimulationControls';
 
 interface CombatInputsProps {
@@ -28,18 +27,6 @@ export const CombatInputs: React.FC<CombatInputsProps> = ({
       <div className="units-row">
         <AttackerInputs attacker={attacker} onChange={onAttackerChange} />
         <DefenderInputs defender={defender} onChange={onDefenderChange} />
-      </div>
-      <div className="special-rules-row">
-        <SpecialRulesInput
-          unitType="attacker"
-          unit={attacker}
-          onChange={(unit) => onAttackerChange(unit as Attacker)}
-        />
-        <SpecialRulesInput
-          unitType="defender"
-          unit={defender}
-          onChange={(unit) => onDefenderChange(unit as Defender)}
-        />
       </div>
       <SimulationControls config={config} onChange={onConfigChange} />
     </div>

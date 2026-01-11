@@ -30,12 +30,19 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
     field: 'rerolls' | 'defensiveRerolls' | 'moraleRerolls',
     value: RerollOption
   ) => (
-    <div className="input-group">
-      <label>{label}</label>
+    <div style={{ marginBottom: '12px' }}>
+      <label style={{ display: 'block', marginBottom: '4px', fontSize: '14px', fontWeight: '500' }}>{label}</label>
       <select
         value={value}
         onChange={(e) => updateField(field, e.target.value as RerollOption)}
-        className="select-input"
+        style={{
+          width: '100%',
+          padding: '8px',
+          fontSize: '14px',
+          border: '1px solid #ddd',
+          borderRadius: '4px',
+          backgroundColor: 'white'
+        }}
       >
         <option value="none">None</option>
         <option value="reroll_sixes">Reroll 6s</option>
@@ -45,54 +52,55 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
   );
 
   return (
-    <div className="special-rules-input">
-      <h4>Special Rules</h4>
-
+    <div>
       {unitType === 'attacker' && (
         <>
-          {renderRerollSelect('Attack Rerolls', 'rerolls', (unit as Attacker).rerolls)}
+          {renderRerollSelect('Attacker Rerolls', 'rerolls', (unit as Attacker).rerolls)}
 
           <Checkbox
             label="Deadly Blades"
             checked={(unit as Attacker).deadlyBlades}
             onChange={(checked) => updateField('deadlyBlades', checked)}
-                      />
+          />
 
           <Checkbox
             label="Flawless Strikes"
             checked={(unit as Attacker).flawlessStrikes}
             onChange={(checked) => updateField('flawlessStrikes', checked)}
-                      />
+          />
 
           <Checkbox
             label="Relentless Blows"
             checked={(unit as Attacker).relentlessBlows}
             onChange={(checked) => updateField('relentlessBlows', checked)}
-                      />
+          />
 
           <Checkbox
             label="Smite"
             checked={(unit as Attacker).smite}
             onChange={(checked) => updateField('smite', checked)}
-                      />
+          />
 
           <Checkbox
             label="Torrential Fire"
             checked={(unit as Attacker).torrentialFire}
             onChange={(checked) => updateField('torrentialFire', checked)}
-                      />
+          />
         </>
       )}
 
       {unitType === 'defender' && (
         <>
+          {renderRerollSelect('Defensive Rerolls', 'defensiveRerolls', (unit as Defender).defensiveRerolls)}
+          {renderRerollSelect('Morale Rerolls', 'moraleRerolls', (unit as Defender).moraleRerolls)}
+
           <NumberInput
             label="Hardened"
             value={(unit as Defender).hardened}
             onChange={(value) => updateField('hardened', value)}
             min={0}
             max={6}
-                      />
+          />
 
           <NumberInput
             label="Indomitable"
@@ -100,13 +108,13 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
             onChange={(value) => updateField('indomitable', value)}
             min={0}
             max={10}
-                      />
+          />
 
           <Checkbox
             label="Oblivious"
             checked={(unit as Defender).oblivious}
             onChange={(checked) => updateField('oblivious', checked)}
-                      />
+          />
 
           <NumberInput
             label="Tenacious"
@@ -114,10 +122,7 @@ export const SpecialRulesInput: React.FC<SpecialRulesInputProps> = ({
             onChange={(value) => updateField('tenacious', value)}
             min={0}
             max={10}
-                      />
-
-          {renderRerollSelect('Defensive Rerolls', 'defensiveRerolls', (unit as Defender).defensiveRerolls)}
-          {renderRerollSelect('Morale Rerolls', 'moraleRerolls', (unit as Defender).moraleRerolls)}
+          />
         </>
       )}
     </div>

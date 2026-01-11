@@ -2,14 +2,13 @@ import React from 'react';
 import { useConquestSimulation } from '../../hooks/useConquestSimulation';
 import { AttackerInputs } from '../inputs/AttackerInputs';
 import { DefenderInputs } from '../inputs/DefenderInputs';
+import { SpecialRulesInput } from '../inputs/SpecialRulesInput';
 import { SimulationControls } from './SimulationControls';
 import { DamageDistributionChart } from '../results/DamageDistributionChart';
 import { DistributionTable } from '../results/DistributionTable';
 import { StatisticsSummary } from '../results/StatisticsSummary';
 import { LoadingSpinner } from '../common/LoadingSpinner';
-import { Checkbox } from '../common/Checkbox';
-import { NumberInput } from '../common/NumberInput';
-import { STAT_CONSTRAINTS } from '../../types/UnitTypes';
+import { Attacker, Defender } from '../../types/UnitTypes';
 import { formatExecutionTime } from '../../utils/formatting';
 
 export const ConquestCalculator: React.FC = () => {
@@ -47,27 +46,23 @@ export const ConquestCalculator: React.FC = () => {
         </div>
         <div className="column-2">
           <div className="special-rules-box">
-            <h3>Attack Special Rules</h3>
+            <h3>Attacker Special Rules</h3>
             <div className="special-rules-content">
-              <Checkbox
-                label="Relentless Blows"
-                checked={attacker.relentlessBlows}
-                onChange={(checked) => setAttacker({ ...attacker, relentlessBlows: checked })}
+              <SpecialRulesInput
+                unitType="attacker"
+                unit={attacker}
+                onChange={(unit) => setAttacker(unit as Attacker)}
               />
-              <p className="rule-description">Rolls of 1 generate 2 hits instead of 1</p>
             </div>
           </div>
           <div className="special-rules-box">
             <h3>Defender Special Rules</h3>
             <div className="special-rules-content">
-              <NumberInput
-                label="Hardened"
-                value={defender.hardened}
-                onChange={(value) => setDefender({ ...defender, hardened: value })}
-                min={STAT_CONSTRAINTS.hardened.min}
-                max={STAT_CONSTRAINTS.hardened.max}
+              <SpecialRulesInput
+                unitType="defender"
+                unit={defender}
+                onChange={(unit) => setDefender(unit as Defender)}
               />
-              <p className="rule-description">Reduces attacker's Cleave by this amount</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Attacker, STAT_CONSTRAINTS } from '../../types/UnitTypes';
 import { NumberInput } from '../common/NumberInput';
-import { SpecialRulesInput } from './SpecialRulesInput';
 
 interface AttackerInputsProps {
   attacker: Attacker;
@@ -53,11 +52,6 @@ export const AttackerInputs: React.FC<AttackerInputsProps> = ({
         onChange={(value) => updateField('extraAttacks', value)}
         min={STAT_CONSTRAINTS.extraAttacks.min}
         max={STAT_CONSTRAINTS.extraAttacks.max}
-      />
-      <SpecialRulesInput
-        unitType="attacker"
-        unit={attacker}
-        onChange={(unit) => onChange(unit as Attacker)}
       />
     </div>
   );

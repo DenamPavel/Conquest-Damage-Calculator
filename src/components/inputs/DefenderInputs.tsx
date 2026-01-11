@@ -1,7 +1,6 @@
 import React from 'react';
 import { Defender, STAT_CONSTRAINTS } from '../../types/UnitTypes';
 import { NumberInput } from '../common/NumberInput';
-import { SpecialRulesInput } from './SpecialRulesInput';
 
 interface DefenderInputsProps {
   defender: Defender;
@@ -53,11 +52,6 @@ export const DefenderInputs: React.FC<DefenderInputsProps> = ({
         onChange={(value) => updateField('morale', value)}
         min={STAT_CONSTRAINTS.morale.min}
         max={STAT_CONSTRAINTS.morale.max}
-      />
-      <SpecialRulesInput
-        unitType="defender"
-        unit={defender}
-        onChange={(unit) => onChange(unit as Defender)}
       />
     </div>
   );
